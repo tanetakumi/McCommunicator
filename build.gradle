@@ -1,0 +1,64 @@
+plugins {
+    id 'fabric-loom' version '1.4-SNAPSHOT'
+    id 'maven-publish'
+}
+
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
+
+archivesBaseName = project.archives_base_name
+version = project.mod_version
+group = project.maven_group
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+    implementation 'com.moandjiezana.toml:toml4j:0.7.2'
+    include 'com.moandjiezana.toml:toml4j:0.7.2'
+
+    include implementation('net.dv8tion:JDA:5.0.0-beta.15'){
+        exclude module: "opus-java"
+    }
+    // extra deps
+    include "org.json:json:20160212"
+    include "com.squareup.okio:okio:1.17.2"
+    include "com.squareup.okhttp3:okhttp:3.13.0"
+    include "org.apache.commons:commons-collections4:4.4"
+    include "org.jetbrains.kotlin:kotlin-stdlib:1.6.21"
+    include "com.neovisionaries:nv-websocket-client:2.14"
+    include "net.sf.trove4j:trove4j:3.0.3"
+    include "com.fasterxml.jackson.core:jackson-databind:2.13.1"
+    include "com.fasterxml.jackson.core:jackson-annotations:2.13.1"
+    include "com.fasterxml.jackson.core:jackson-core:2.13.1"
+}
+
+processResources {
+    inputs.property "version", project.version
+
+    filesMatching("fabric.mod.json") {
+        expand "version": project.version
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = "UTF-8"
+}
+
+java {
+    withSourcesJar()
+}
+
+jar {
+    from("LICENSE") {
+        rename { "${it}_${project.archivesBaseName}"}
+    }
+}

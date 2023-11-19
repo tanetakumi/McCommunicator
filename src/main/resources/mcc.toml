@@ -1,0 +1,13 @@
+# MCC config
+
+
+[discord]
+    token=""
+    channelId=""
+
+    [discord.player-list]
+        title="CraftersHub"
+        channelId=""
+        messageId=""
+
+

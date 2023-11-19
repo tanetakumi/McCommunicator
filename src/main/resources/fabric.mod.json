@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "mcc",
+  "version": "${version}",
+
+  "name": "McCommunicator",
+  "description": "This is an essential mod",
+  "authors": [
+    "HANE"
+  ],
+  "contact": {
+    "repo": "https://github.com/tanet/McCommunicator"
+  },
+  "license": "MIT License",
+  "icon": "assets/mcc/mccicon.png",
+  "environment": "*",
+  "entrypoints": {
+    "server": [
+      "net.serveron.hane.mccommunicator.MccServer"
+    ],
+    "main": [
+      "net.serveron.hane.mccommunicator.McCommunicator"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.14.21",
+    "fabric": "*",
+    "minecraft": ">=1.18.2",
+    "java": ">=17"
+  }
+}
